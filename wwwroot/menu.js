@@ -1,0 +1,1 @@
+document.querySelectorAll('.service-menu').forEach(function(menu){document.addEventListener('click',function(e){if(!menu.contains(e.target))menu.open=false});menu.addEventListener('keydown',function(e){if(e.key==='Escape'){menu.open=false;menu.querySelector('summary').focus()}})});

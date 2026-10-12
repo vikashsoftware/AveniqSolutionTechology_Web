@@ -1,0 +1,34 @@
+services:
+  web:
+    build: .
+    restart: unless-stopped
+    expose:
+      - "8080"
+    networks:
+      aveniq:
+        ipv4_address: 172.30.80.2
+  proxy:
+    image: caddy:2
+    restart: unless-stopped
+    depends_on:
+      - web
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?Set DOMAIN in the .env file}
+    volumes:
+      - ./deployment/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    networks:
+      aveniq:
+        ipv4_address: 172.30.80.3
+networks:
+  aveniq:
+    ipam:
+      config:
+        - subnet: 172.30.80.0/24
+volumes:
+  caddy_data:
+  caddy_config:
