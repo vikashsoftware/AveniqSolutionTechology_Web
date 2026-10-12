@@ -5,7 +5,8 @@
   "description": "Aveniq ASP.NET Core MVC site. package.json added to enable full import by some hosting providers.",
   "scripts": {
     "start": "dotnet run --project AveniqMvc.csproj --urls http://0.0.0.0:5000",
-    "build": "dotnet publish AveniqMvc.csproj -c Release -o ./publish",
+    "build": "sh -c \"if command -v dotnet >/dev/null 2>&1; then dotnet publish AveniqMvc.csproj -c Release -o ./publish; else npm run build:static; fi\"",
+    "build:static": "sh -c \"mkdir -p ./publish && cp -r wwwroot/* ./publish/ || true && echo 'Static export: server-side views not included. Deploy the published folder for a static site.' > ./publish/README.txt\"",
     "dev": "dotnet watch --project AveniqMvc.csproj run"
   }
 }
