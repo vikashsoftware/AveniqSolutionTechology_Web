@@ -1,0 +1,11 @@
+{
+  "name": "aveniqmvc",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aveniq ASP.NET Core MVC site. package.json added to enable full import by some hosting providers.",
+  "scripts": {
+    "start": "dotnet run --project AveniqMvc.csproj --urls http://0.0.0.0:5000",
+    "build": "dotnet publish AveniqMvc.csproj -c Release -o ./publish",
+    "dev": "dotnet watch --project AveniqMvc.csproj run"
+  }
+}
